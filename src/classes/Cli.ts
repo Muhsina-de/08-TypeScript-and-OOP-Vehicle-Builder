@@ -190,8 +190,9 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          parseInt(answers.towingCapacity),
-            []
+          [],
+          parseInt(answers.towingCapacity)
+          
         );
         // TODO: push the truck to the vehicles array
         this.vehicles.push(truck);
@@ -267,8 +268,9 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
-          new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand)
+          [new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
+          new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand)]
+          
         );
         // TODO: push the motorbike to the vehicles array
         this.vehicles.push(motorbike);
@@ -410,37 +412,31 @@ class Cli {
               return;
             }
           }
-          if (answers.action === 'Wheelie') {
-            // find the selected motorbike and perform a wheelie
-            for (let i = 0; i < this.vehicles.length; i++) {
-              if (this.vehicles[i].vin === this.selectedVehicleVin) {
-                if (this.vehicles[i] instanceof Motorbike) {
-               
-                  this.vehicles[i].wheelie();
-                }
+        } else if (answers.action === 'Wheelie') {
+          // find the selected motorbike and perform a wheelie
+          for (let i = 0; i < this.vehicles.length; i++) {
+            const vehicle = this.vehicles[i];
+            if (this.vehicles[i].vin === this.selectedVehicleVin) {
+              if (vehicle instanceof Motorbike) {
+                vehicle.wheelie();
+              } else {
+                console.log('The selected vehicle is not a motorbike');
               }
-                else {
-                  console.log('The selected vehicle is not a motorbike'); 
-              }
-            
+            }
           }
-        }
-        // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
-        else if (answers.action === 'Select or create another vehicle') {
+        } else if (answers.action === 'Select or create another vehicle') {
           // start the cli to return to the initial prompt if the user wants to select or create another vehicle
           this.startCli();
           return;
-         }
-          else {
-                       // exit the cli if the user selects exit
-                      this.exit = true;
-                      return;
-                        }
-          if (!this.exit) {
+        } else {
+          // exit the cli if the user selects exit
+          this.exit = true;
+          return;
+        }
+        if (!this.exit) {
           // if the user does not want to exit, perform actions on the selected vehicle
           this.performActions();
-                         }
-       }
+        }
       });
   }
 

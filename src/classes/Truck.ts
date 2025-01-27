@@ -30,7 +30,7 @@ constructor(
   weight: number,
   topSpeed: number,
   wheels: Wheel[],
-  towingCapacity: number
+  towingCapacity: number,
             ) 
   {
    // TODO: The constructor should call the constructor of the parent class, Vehicle
@@ -38,6 +38,7 @@ constructor(
   super();
   
     // TODO: The constructor should initialize the properties of the Truck class
+    
     this.towingCapacity = towingCapacity;
     this.vin = vin;
     this.color = color;
@@ -46,7 +47,7 @@ constructor(
     this.year = year;
     this.weight = weight;
     this.topSpeed = topSpeed;
-    //this.wheels = wheels;
+    this.wheels = wheels;
   
     
     // TODO: The constructor should check if the wheels array has 4 elements and create 4 new default Wheel objects if it does not
